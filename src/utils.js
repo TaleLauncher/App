@@ -117,7 +117,7 @@ function getOrCreateUuid(playerName) {
     const key = playerName.toLowerCase();
 
     if (!players[key]) {
-        players[key] = uuidv4().replace(/-/g, '');
+        players[key] = uuidv4();
         try {
             fs.writeJsonSync(uuidFile, players, { spaces: 2 });
         } catch (e) { }
