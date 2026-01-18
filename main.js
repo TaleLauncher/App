@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const config = require('./src/config');
 const { GameLauncher } = require('./src/launcher');
@@ -38,6 +39,7 @@ function createWindow() {
 
 app.whenReady().then(() => {
     createWindow();
+    autoUpdater.checkForUpdatesAndNotify();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();

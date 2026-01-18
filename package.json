@@ -10,6 +10,7 @@
     "dependencies": {
         "adm-zip": "^0.5.10",
         "axios": "^1.6.0",
+        "electron-updater": "^6.7.3",
         "fs-extra": "^11.1.1",
         "uuid": "^9.0.1"
     },
@@ -20,6 +21,13 @@
     "build": {
         "appId": "com.talelauncher.app",
         "productName": "TaleLauncher",
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "TaleLauncher",
+                "repo": "App"
+            }
+        ],
         "directories": {
             "output": "dist"
         },
