@@ -4,7 +4,7 @@ const path = require('path');
 const config = require('./src/config');
 const { GameLauncher } = require('./src/launcher');
 const { ModsManager, WorldsManager } = require('./src/managers');
-const { SettingsManager, toggleOnlineMode } = require('./src/utils');
+const { SettingsManager, toggleOnlineMode, changeBackground } = require('./src/utils');
 
 let mainWindow;
 const launcher = new GameLauncher();
@@ -133,6 +133,21 @@ ipcMain.handle('toggle-online-mode', async (event, enable) => {
     } catch (error) {
         return { success: false, error: error.message };
     }
+});
+
+
+
+ipcMain.handle('change-background', async (event, filePath) => {
+    try {
+        const newPath = await changeBackground(filePath);
+        return { success: true, path: newPath };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+});
+
+ipcMain.handle('get-launcher-dir', () => {
+    return config.LAUNCHER_DIR;
 });
 
 ipcMain.on('open-url', (event, url) => {

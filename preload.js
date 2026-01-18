@@ -15,6 +15,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     importWorld: (path) => ipcRenderer.invoke('import-world', path),
     renameWorld: (data) => ipcRenderer.invoke('rename-world', data),
     toggleOnlineMode: (enable) => ipcRenderer.invoke('toggle-online-mode', enable),
+    changeBackground: (filePath) => ipcRenderer.invoke('change-background', filePath),
+    getLauncherDir: () => ipcRenderer.invoke('get-launcher-dir'),
     openUrl: (url) => ipcRenderer.send('open-url', url),
 
     // Listeners

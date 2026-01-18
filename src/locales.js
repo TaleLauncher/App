@@ -29,6 +29,9 @@ const TRANS_EN = {
     "settings.online_warning_title": "Warning",
     "settings.online_warning_text": "May have bugs and only works when \"Latest version\" is selected.",
     "settings.close": "Close",
+    "settings.change_bg": "Custom Background",
+    "settings.reset_bg": "Reset",
+    "settings.choose_bg": "Choose",
 
     "mods.title": "Mods Manager",
     "mods.upload": "Upload Mod",
@@ -95,6 +98,9 @@ const TRANS_RU = {
     "settings.online_warning_title": "Внимание",
     "settings.online_warning_text": "Могут быть баги и работает только когда выбранна \"Последняя версия\".",
     "settings.close": "Закрыть",
+    "settings.change_bg": "Свой фон",
+    "settings.reset_bg": "Сброс",
+    "settings.choose_bg": "Выбрать",
 
     "mods.title": "Менеджер Модов",
     "mods.upload": "Загрузить мод",

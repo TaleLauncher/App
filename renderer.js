@@ -23,6 +23,8 @@ const settingsBtn = document.getElementById('settings-btn');
 const settingsModal = document.getElementById('settings-modal');
 const toggleOnlineBtn = document.getElementById('toggle-online-btn');
 const closeSettingsBtn = document.getElementById('close-settings-btn');
+const chooseBgBtn = document.getElementById('choose-bg-btn');
+const resetBgBtn = document.getElementById('reset-bg-btn');
 
 // Localization keys
 const localeKeys = [
@@ -54,6 +56,7 @@ async function init() {
     updateLocales();
     loadVersions();
     checkLaunchReady();
+    applyCustomBackground();
 }
 
 async function loadVersions() {
@@ -114,7 +117,10 @@ const labels = {
     'label-settings': 'launcher.settings',
     'modal-settings-title': 'settings.title',
     'label-online-mode': 'settings.online_mode',
-    'close-settings-btn': 'settings.close'
+    'close-settings-btn': 'settings.close',
+    'label-change-bg': 'settings.change_bg',
+    'choose-bg-btn': 'settings.choose_bg',
+    'reset-bg-btn': 'settings.reset_bg'
 };
 
 // Events
@@ -214,6 +220,39 @@ async function updateOnlineBtn(isOnline) {
         toggleOnlineBtn.classList.add('danger');
     } else {
         toggleOnlineBtn.classList.remove('danger');
+    }
+}
+
+chooseBgBtn.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async (e) => {
+        if (e.target.files.length > 0) {
+            const result = await api.changeBackground(e.target.files[0].path);
+            if (result.success) {
+                api.setSetting('custom_bg', result.path);
+                applyCustomBackground();
+            } else {
+                alert(`Error: ${result.error}`);
+            }
+        }
+    };
+    input.click();
+});
+
+resetBgBtn.addEventListener('click', () => {
+    api.setSetting('custom_bg', null);
+    applyCustomBackground();
+});
+
+async function applyCustomBackground() {
+    const bg = await api.getSetting('custom_bg', null);
+    if (bg) {
+        // Use a cache buster to force refresh
+        document.body.style.setProperty('--bg-image', `url('${bg.replace(/\\/g, '/') + '?t=' + Date.now()}')`);
+    } else {
+        document.body.style.setProperty('--bg-image', "url('art/bg.jpg')");
     }
 }
 

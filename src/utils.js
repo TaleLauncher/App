@@ -178,6 +178,14 @@ async function toggleOnlineMode(enable, progressCallback = null) {
     }
 }
 
+async function changeBackground(filePath) {
+    const ext = path.extname(filePath);
+    const bgPath = path.join(config.LAUNCHER_DIR, `custom_bg${ext}`);
+    await fs.ensureDir(config.LAUNCHER_DIR);
+    await fs.copy(filePath, bgPath, { overwrite: true });
+    return bgPath;
+}
+
 class SettingsManager {
     static loadSettings() {
         if (fs.existsSync(config.SETTINGS_FILE)) {
@@ -218,5 +226,6 @@ module.exports = {
     getOrCreateUuid,
     checkUrlExists,
     toggleOnlineMode,
+    changeBackground,
     SettingsManager
 };
