@@ -210,6 +210,11 @@ toggleOnlineBtn.addEventListener('click', async () => {
 async function updateOnlineBtn(isOnline) {
     const text = await api.translate(isOnline ? 'settings.disable' : 'settings.enable');
     toggleOnlineBtn.innerText = text;
+    if (isOnline) {
+        toggleOnlineBtn.classList.add('danger');
+    } else {
+        toggleOnlineBtn.classList.remove('danger');
+    }
 }
 
 // Modals logic

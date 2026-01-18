@@ -202,13 +202,13 @@ select:focus {
 .managers-row {
     width: 334px;
     display: flex;
-    justify-content: space-between;
+    gap: 8px;
     margin-bottom: 15px;
 }
 
 .manager-btn {
-    width: 106px;
-    height: 44px;
+    flex: 1;
+    height: 48px;
     background: rgba(20, 30, 45, 0.7);
     border: 2px solid #2a4b7c;
     border-radius: 4px;
@@ -226,8 +226,8 @@ select:focus {
 
 .icon-svg {
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     background-color: white;
     /* Default white */
     -webkit-mask-size: contain;
@@ -237,8 +237,6 @@ select:focus {
     -webkit-mask-position: center;
     mask-position: center;
     vertical-align: middle;
-    margin-right: 8px;
-    /* Spacing */
 }
 
 #website-btn .icon-svg {
@@ -377,6 +375,10 @@ select:focus {
     z-index: 2005;
 }
 
+#settings-modal {
+    width: 450px;
+}
+
 .modal-header h2 {
     margin: 0 0 20px 0;
     font-size: 20px;
@@ -410,7 +412,7 @@ select:focus {
     gap: 12px;
 }
 
-.modal-actions .action-btn {
+.action-btn {
     background: linear-gradient(to bottom, #4a86d4 0%, #355d91 100%);
     border: 1px solid #5fa1f5;
     border-radius: 4px;
@@ -423,9 +425,18 @@ select:focus {
     text-transform: uppercase;
 }
 
-.modal-actions .action-btn:hover {
+.action-btn:hover {
     filter: brightness(1.1);
     transform: translateY(-1px);
+}
+
+.action-btn.danger {
+    background: linear-gradient(to bottom, #ff5555 0%, #cc3333 100%);
+    border-color: #ff8888;
+}
+
+.action-btn.danger:hover {
+    background: linear-gradient(to bottom, #ff6666 0%, #dd4444 100%);
 }
 
 .hidden {
