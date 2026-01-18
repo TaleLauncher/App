@@ -4,7 +4,7 @@ const path = require('path');
 const config = require('./src/config');
 const { GameLauncher } = require('./src/launcher');
 const { ModsManager, WorldsManager } = require('./src/managers');
-const { SettingsManager } = require('./src/utils');
+const { SettingsManager, toggleOnlineMode } = require('./src/utils');
 
 let mainWindow;
 const launcher = new GameLauncher();
@@ -117,6 +117,19 @@ ipcMain.handle('rename-world', (event, { oldName, newName }) => {
     try {
         WorldsManager.renameWorld(oldName, newName);
         return { success: true, worlds: WorldsManager.getWorlds() };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+});
+
+ipcMain.handle('toggle-online-mode', async (event, enable) => {
+    try {
+        await toggleOnlineMode(enable, (downloaded, total) => {
+            const percent = Math.round((downloaded / total) * 100);
+            mainWindow.webContents.send('launcher-progress', percent);
+            mainWindow.webContents.send('launcher-status', `Downloading Online Client: ${percent}%`);
+        });
+        return { success: true };
     } catch (error) {
         return { success: false, error: error.message };
     }

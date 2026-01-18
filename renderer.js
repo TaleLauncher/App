@@ -19,6 +19,10 @@ const renameModal = document.getElementById('rename-modal');
 const welcomeModal = document.getElementById('welcome-modal');
 const overlay = document.getElementById('overlay');
 const renameInput = document.getElementById('rename-input');
+const settingsBtn = document.getElementById('settings-btn');
+const settingsModal = document.getElementById('settings-modal');
+const toggleOnlineBtn = document.getElementById('toggle-online-btn');
+const closeSettingsBtn = document.getElementById('close-settings-btn');
 
 // Localization keys
 const localeKeys = [
@@ -106,7 +110,11 @@ const labels = {
     'close-worlds-btn': 'worlds.close',
     'welcome-title': 'launcher.welcome_title',
     'welcome-text': 'launcher.welcome_text',
-    'label-agree': 'launcher.agree_button'
+    'label-agree': 'launcher.agree_button',
+    'label-settings': 'launcher.settings',
+    'modal-settings-title': 'settings.title',
+    'label-online-mode': 'settings.online_mode',
+    'close-settings-btn': 'settings.close'
 };
 
 // Events
@@ -162,6 +170,48 @@ document.getElementById('close-mods-btn').addEventListener('click', hideModals);
 document.getElementById('close-worlds-btn').addEventListener('click', hideModals);
 overlay.addEventListener('click', hideModals);
 
+settingsBtn.addEventListener('click', async () => {
+    const isOnline = await api.getSetting('online', false);
+    await updateOnlineBtn(isOnline);
+    showModal(settingsModal);
+});
+
+closeSettingsBtn.addEventListener('click', hideModals);
+
+toggleOnlineBtn.addEventListener('click', async () => {
+    const isOnline = await api.getSetting('online', false);
+    const newStatus = !isOnline;
+
+    if (newStatus) {
+        const confirmTitle = await api.translate('settings.online_warning_title');
+        const confirmText = await api.translate('settings.online_warning_text');
+        if (!confirm(`${confirmTitle}\n\n${confirmText}`)) return;
+    }
+
+    hideModals();
+    setControlsEnabled(false);
+    progressContainer.style.display = 'block';
+
+    try {
+        const result = await api.toggleOnlineMode(newStatus);
+        if (result.success) {
+            statusText.innerText = await api.translate('launcher.ready');
+            // Re-sync UI if needed
+        } else {
+            alert(`Error: ${result.error}`);
+        }
+    } catch (e) {
+        alert(`Error: ${e.message}`);
+    } finally {
+        setControlsEnabled(true);
+    }
+});
+
+async function updateOnlineBtn(isOnline) {
+    const text = await api.translate(isOnline ? 'settings.disable' : 'settings.enable');
+    toggleOnlineBtn.innerText = text;
+}
+
 // Modals logic
 function showModal(modal) {
     overlay.classList.remove('hidden');
@@ -174,6 +224,7 @@ function hideModals() {
     worldsModal.classList.add('hidden');
     renameModal.classList.add('hidden');
     welcomeModal.classList.add('hidden');
+    settingsModal.classList.add('hidden');
 }
 
 function showWelcome() {

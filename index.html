@@ -54,6 +54,11 @@
                         style="-webkit-mask-image: url('art/icons/globe-solid.svg'); mask-image: url('art/icons/globe-solid.svg');"></span>
                     <span id="label-worlds">WORLDS</span>
                 </button>
+                <button id="settings-btn" class="manager-btn">
+                    <span class="icon-svg"
+                        style="-webkit-mask-image: url('art/icons/globe-solid.svg'); mask-image: url('art/icons/globe-solid.svg');"></span>
+                    <span id="label-settings">SETTINGS</span>
+                </button>
             </div>
 
             <div class="status-container">
@@ -143,6 +148,21 @@
         <div class="modal-actions">
             <button id="agree-btn" class="action-btn"><span id="label-agree">I Agree to buy the game
                     later</span></button>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="modal-settings-title">Settings Manager</h2>
+        </div>
+        <div class="modal-content">
+            <div class="item-row">
+                <span class="name" id="label-online-mode">Online Mode</span>
+                <button id="toggle-online-btn" class="action-btn">Enable</button>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button id="close-settings-btn" class="action-btn">Close</button>
         </div>
     </div>
 

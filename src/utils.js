@@ -148,6 +148,36 @@ async function checkUrlExists(url) {
     }
 }
 
+async function toggleOnlineMode(enable, progressCallback = null) {
+    const gameDir = config.getGameDir('release');
+    const clientPath = path.join(gameDir, 'Client', 'HytaleClient.exe');
+    const backupDir = path.join(gameDir, 'Backup');
+    const backupPath = path.join(backupDir, 'HytaleClient.exe');
+
+    if (enable) {
+        // Enable Online Mode
+        if (await fs.pathExists(clientPath)) {
+            await fs.ensureDir(backupDir);
+            await fs.copy(clientPath, backupPath, { overwrite: true });
+        }
+
+        const downloadUrl = 'https://github.com/TaleLauncher/App/releases/download/Dev/HytaleClient.exe';
+        await downloadFile(downloadUrl, clientPath, progressCallback);
+
+        SettingsManager.setSetting('online', true);
+    } else {
+        // Disable Online Mode
+        if (await fs.pathExists(backupPath)) {
+            if (await fs.pathExists(clientPath)) {
+                await fs.remove(clientPath);
+            }
+            await fs.move(backupPath, clientPath);
+        }
+
+        SettingsManager.setSetting('online', false);
+    }
+}
+
 class SettingsManager {
     static loadSettings() {
         if (fs.existsSync(config.SETTINGS_FILE)) {
@@ -187,5 +217,6 @@ module.exports = {
     flattenDirectory,
     getOrCreateUuid,
     checkUrlExists,
+    toggleOnlineMode,
     SettingsManager
 };

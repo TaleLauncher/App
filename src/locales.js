@@ -20,6 +20,15 @@ const TRANS_EN = {
     "launcher.agree_button": "I Agree to buy the game later",
     "launcher.error": "Error: {0}",
     "launcher.failed_versions": "Failed to load versions: {0}",
+    "launcher.settings": "SETTINGS",
+
+    "settings.title": "Settings Manager",
+    "settings.online_mode": "Online Mode",
+    "settings.enable": "Enable",
+    "settings.disable": "Disable",
+    "settings.online_warning_title": "Warning",
+    "settings.online_warning_text": "May have bugs and only works when \"Latest version\" is selected.",
+    "settings.close": "Close",
 
     "mods.title": "Mods Manager",
     "mods.upload": "Upload Mod",
@@ -77,6 +86,15 @@ const TRANS_RU = {
     "launcher.agree_button": "Я куплю игру позже",
     "launcher.error": "Ошибка: {0}",
     "launcher.failed_versions": "Ошибка загрузки версий: {0}",
+    "launcher.settings": "НАСТРОЙКИ",
+
+    "settings.title": "Настройки",
+    "settings.online_mode": "Онлайн режим",
+    "settings.enable": "Включить",
+    "settings.disable": "Выключить",
+    "settings.online_warning_title": "Внимание",
+    "settings.online_warning_text": "Могут быть баги и работает только когда выбранна \"Последняя версия\".",
+    "settings.close": "Закрыть",
 
     "mods.title": "Менеджер Модов",
     "mods.upload": "Загрузить мод",
