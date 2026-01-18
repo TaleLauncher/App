@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>TaleLauncher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="drag-area"></div>
+
+    <div class="title-bar">
+        <div class="spacer"></div>
+        <button id="close-btn" class="title-btn close-btn">✕</button>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <div class="launcher-header">
+                <h1 class="gold-text">TALE LAUNCHER</h1>
+                <div class="gold-divider"></div>
+            </div>
+
+            <div class="form-group">
+                <label id="label-nickname">NICKNAME</label>
+                <div class="input-wrapper">
+                    <input type="text" id="nickname-field" placeholder="Enter nickname">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label id="label-version">VERSION</label>
+                <div class="input-wrapper">
+                    <select id="version-dropdown">
+                        <option value="" disabled selected id="hint-loading">Loading...</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="launch-btn" disabled>
+                <span id="label-launch">LAUNCH GAME</span>
+                <span class="icon">➜</span>
+            </button>
+
+            <div class="managers-row">
+                <button id="mods-btn" class="manager-btn">
+                    <span class="icon-svg"
+                        style="-webkit-mask-image: url('art/icons/puzzle-piece-solid.svg'); mask-image: url('art/icons/puzzle-piece-solid.svg');"></span>
+                    <span id="label-mods">MODS</span>
+                </button>
+                <button id="worlds-btn" class="manager-btn">
+                    <span class="icon-svg"
+                        style="-webkit-mask-image: url('art/icons/globe-solid.svg'); mask-image: url('art/icons/globe-solid.svg');"></span>
+                    <span id="label-worlds">WORLDS</span>
+                </button>
+            </div>
+
+            <div class="status-container">
+                <div id="progress-bar" class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <div id="status-text">Ready</div>
+            </div>
+        </div>
+
+        <div class="bottom-left">
+            <button id="website-btn" class="social-btn">
+                <span class="icon-svg"
+                    style="-webkit-mask-image: url('art/icons/globe-solid.svg'); mask-image: url('art/icons/globe-solid.svg');"></span>
+                <span id="label-website">WEBSITE</span>
+            </button>
+            <button id="youtube-btn" class="social-btn">
+                <span class="icon-svg"
+                    style="-webkit-mask-image: url('art/icons/youtube-brands-solid.svg'); mask-image: url('art/icons/youtube-brands-solid.svg');"></span>
+                <span id="label-youtube">YOUTUBE</span>
+            </button>
+        </div>
+
+        <div class="bottom-right">
+            <select id="lang-switcher">
+                <option value="EN">EN</option>
+                <option value="RU">RU</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="overlay" class="hidden"></div>
+    <div id="rename-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="modal-rename-title">Rename World</h2>
+        </div>
+        <div class="modal-content">
+            <div class="form-group">
+                <label id="label-new-name">NEW NAME</label>
+                <div class="input-wrapper">
+                    <input type="text" id="rename-input" placeholder="Enter new name">
+                </div>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button id="confirm-rename-btn" class="action-btn">Confirm</button>
+            <button id="cancel-rename-btn" class="action-btn">Cancel</button>
+        </div>
+    </div>
+
+    <div id="mods-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="modal-mods-title">Mods Manager</h2>
+        </div>
+        <div class="modal-content" id="mods-list">
+            <!-- Mods items here -->
+        </div>
+        <div class="modal-actions">
+            <button id="upload-mod-btn" class="action-btn"><span id="label-upload-mod">Upload Mod</span></button>
+            <button id="close-mods-btn" class="action-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="worlds-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="modal-worlds-title">Worlds Manager</h2>
+        </div>
+        <div class="modal-content grid" id="worlds-grid">
+            <!-- Worlds items here -->
+        </div>
+        <div class="modal-actions">
+            <button id="import-world-btn" class="action-btn"><span id="label-import-world">Import World
+                    (.zip)</span></button>
+            <button id="close-worlds-btn" class="action-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="welcome-modal" class="modal hidden">
+        <div class="modal-header">
+            <h2 id="welcome-title">Welcome to TaleLauncher</h2>
+        </div>
+        <div class="modal-content" id="welcome-text">
+            This is a fan-made launcher. If you enjoy the game, please agree that simplify you will support the
+            developers and buy the official game when it releases.
+        </div>
+        <div class="modal-actions">
+            <button id="agree-btn" class="action-btn"><span id="label-agree">I Agree to buy the game
+                    later</span></button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
